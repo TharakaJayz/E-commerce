@@ -1,0 +1,29 @@
+.item_main{
+    width: 25vw;
+    height: 55vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vh;
+    border: 1px solid rgb(166, 164, 164);
+}
+
+#item_img{
+    width: 50%;
+    height: auto;
+    height: 45%;
+}
+
+.item_main > button{
+    font-size: 1.2rem;
+    padding:0.2em 1em;
+    color: #fff;
+    background-color: black;
+    cursor: pointer;
+    border: transparent;
+}
+
+.item_main > button:active{
+    background-color: red;
+}

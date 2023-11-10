@@ -1,0 +1,10 @@
+.order_main{
+    width: 100vw;
+    min-height: 100vh;
+    
+}
+
+.order_body{
+    width: 100%;
+    padding: var(--padding_main);
+}
