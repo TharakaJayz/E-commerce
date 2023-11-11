@@ -3,6 +3,7 @@ import "./AdminHome.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import { checkEmpty } from "../../Validations/Validations";
 import axios from "axios";
+import ErrorCard from "../../Components/ErrorCard/ErrorCard";
 
 const AdminHome = () => {
   const loggedUser = {
@@ -11,6 +12,7 @@ const AdminHome = () => {
     userType: localStorage.getItem("userType") || "user",
   };
 
+  const [cardLogic,setCardLogic] = useState(false);
   const [titleInput, setTitleInput] = useState("");
   const [descInput, setDescInput] = useState("");
   const [priceInput, setPriceInput] = useState("");
@@ -20,6 +22,12 @@ const AdminHome = () => {
   const [categoryInput, setCategoryInput] = useState("");
 
   const [error, setError] = useState({ logic: false, msg: "" });
+
+  const diplayCardHandler = (value)  =>{
+        if(value){
+            window.location.reload();
+        }
+  }
 
   const formHandler = async (e) => {
     e.preventDefault();
@@ -92,6 +100,7 @@ const AdminHome = () => {
     }
 
     setError({ logic: false, msg: "" });
+    setCardLogic(true);
 
     setTitleInput("");
     setDescInput("");
@@ -220,6 +229,7 @@ const AdminHome = () => {
           </div>
         </form>
       </div>
+      {cardLogic && (<ErrorCard details = {{message:"Item Added Successfully", btn1:[true,"ok"], btn2:[false,"cancel"]}} fn = {diplayCardHandler} />)}
     </div>
   );
 };

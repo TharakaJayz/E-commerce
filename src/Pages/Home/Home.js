@@ -10,28 +10,34 @@ import { MdImportantDevices } from "react-icons/md";
 import axios from "axios";
 const Home = () => {
   const [selectedTitle, setSelectedTitle] = useState("All");
-  const [items,setItems] = useState([]);
+  const [items, setItems] = useState([]);
 
-  useEffect(()=>{
-      const gettingItems = async ()  =>{
-        try{
-          const itemsFromBackend = await axios.get("http://localhost:8081/api/v1/product/all product");
-          console.log("items in DB",itemsFromBackend.data);
-          setItems(itemsFromBackend.data);
-        }catch(err){
-          console.log("item fetching error",err)
-        }
-     
+  useEffect(() => {
+    const gettingItems = async () => {
+      try {
+        const itemsFromBackend = await axios.get(
+          "http://localhost:8081/api/v1/product/all product"
+        );
+        console.log("items in DB", itemsFromBackend.data);
+        setItems(itemsFromBackend.data);
+        console.log("back items in home",itemsFromBackend.data)
+      } catch (err) {
+        console.log("item fetching error", err);
       }
-      gettingItems();
-  },[])
+    };
+    gettingItems();
+  }, []);
   return (
     <div className="home_main">
       <Navbar />
       <div className="home_sections">
         <section className="home_sec home_sec-1">
           <div
-            className={selectedTitle === "All" ? `sec-1_div sec_1_div_display` : `sec-1_div`}
+            className={
+              selectedTitle === "All"
+                ? `sec-1_div sec_1_div_display`
+                : `sec-1_div`
+            }
             onClick={() => {
               setSelectedTitle("All");
             }}
@@ -43,7 +49,11 @@ const Home = () => {
             <span>All</span>
           </div>
           <div
-            className={selectedTitle === "Mobile" ? `sec-1_div sec_1_div_display` : `sec-1_div`}
+            className={
+              selectedTitle === "Mobile"
+                ? `sec-1_div sec_1_div_display`
+                : `sec-1_div`
+            }
             onClick={() => {
               setSelectedTitle("Mobile");
             }}
@@ -55,7 +65,11 @@ const Home = () => {
             <span>Mobile</span>
           </div>
           <div
-            className={selectedTitle === "Laptop" ? `sec-1_div sec_1_div_display` : `sec-1_div`}
+            className={
+              selectedTitle === "Laptop"
+                ? `sec-1_div sec_1_div_display`
+                : `sec-1_div`
+            }
             onClick={() => {
               setSelectedTitle("Laptop");
             }}
@@ -67,7 +81,11 @@ const Home = () => {
             <span>Laptop </span>
           </div>
           <div
-            className={selectedTitle === "Tab" ? `sec-1_div sec_1_div_display` : `sec-1_div`}
+            className={
+              selectedTitle === "Tab"
+                ? `sec-1_div sec_1_div_display`
+                : `sec-1_div`
+            }
             onClick={() => {
               setSelectedTitle("Tab");
             }}
@@ -79,6 +97,7 @@ const Home = () => {
             <span>Tab</span>
           </div>
         </section>
+       
         <section className="home_sec home_sec-2">
           {selectedTitle === "All" &&
             items.map((item) => {
@@ -90,8 +109,8 @@ const Home = () => {
                     title={item.title}
                     price={item.price}
                     qty={item.quantity}
-                    id={item.id}
-                    brand ={item.brand}
+                    id={item.id.toString() }
+                    brand={item.brand}
                   />{" "}
                 </div>
               );
@@ -99,7 +118,7 @@ const Home = () => {
 
           {selectedTitle === "Mobile" &&
             items.map((item) => {
-              if (item.category.name.trim()=== "Mobile") {
+              if (item.category.name.trim() === "Mobile") {
                 return (
                   <div key={item.id}>
                     {" "}
@@ -108,8 +127,8 @@ const Home = () => {
                       title={item.title}
                       price={item.price}
                       qty={item.quantity}
-                      id={item.id}
-                      brand ={item.brand}
+                      id={item.id.toString() }
+                      brand={item.brand}
                     />{" "}
                   </div>
                 );
@@ -129,8 +148,8 @@ const Home = () => {
                       title={item.title}
                       price={item.price}
                       qty={item.quantity}
-                      id={item.id}
-                      brand ={item.brand}
+                      id={item.id.toString() }
+                      brand={item.brand}
                     />{" "}
                   </div>
                 );
@@ -150,8 +169,8 @@ const Home = () => {
                       title={item.title}
                       price={item.price}
                       qty={item.quantity}
-                      id={item.id}
-                      brand ={item.brand}
+                      id={item.id.toString() }
+                      brand={item.brand}
                     />{" "}
                   </div>
                 );

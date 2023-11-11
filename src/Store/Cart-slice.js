@@ -1,6 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { items } from "../Data/Data";
+// import { items } from "../Data/Data";
+import axios from "axios";
 
+
+
+
+
+ const getItems = async()  =>{
+
+  try {
+     const itemsFromBackend = await axios.get(
+      "http://localhost:8081/api/v1/product/all product"
+    );
+    // console.log("items in DB", itemsFromBackend.data);
+    return itemsFromBackend.data;
+    
+    
+  } catch (err) {
+    // console.log("item fetching error", err);
+    return [];
+  }
+}
+
+let items = await getItems()
+
+
+// console.log("items in redux",items)
 const loggedUser = {
   // userName: localStorage.getItem("userName"),
   token: localStorage.getItem("userToken"),
@@ -27,11 +52,11 @@ const cartSlice = createSlice({
       let existingIndex = state.cartItems.findIndex(
         (item) => item.id.trim() === action.payload.id.trim()
       );
-
+      // console.log("items in redux",items)
       const exisistingItemDetails = items.filter(
-        (singleItem) => singleItem.id === action.payload.id.trim()
+        (singleItem) => singleItem.id == action.payload.id.trim()
       )[0];
-      // console.log("selected Item",exisistingItemDetails);
+      // console.log("selected Item",exisistingItemDetails.quantity);
       if (existingIndex >= 0) {
         if (
           exisistingItemDetails.quantity > state.cartItems[existingIndex].ORDQTY
@@ -65,7 +90,10 @@ const cartSlice = createSlice({
           // console.log("reduced ORDQTY", state.cartItems[existingIndex].ORDQTY);
           state.totalPrice -= action.payload.price;
           // console.log("reduced price", action.payload.price);
-          state.totalItems--;
+          if(state.totalItems>0 && (state.cartItems[existingIndex].ORDQTY ===0)){
+
+            state.totalItems--;
+          }
           return;
         } else {
           state.cartItems.splice(existingIndex, 1);
@@ -85,6 +113,12 @@ const cartSlice = createSlice({
       state.totalItems = state.cartItems.length;
       state.totalPrice -= action.payload.ORDQTY * action.payload.price;
     },
+    deleteCart(state){
+      state.cartItems = [];
+      state.totalItems = 0;
+      state.totalPrice -= 0;
+
+    }
   },
 });
 
