@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import ItemCard from "../../Components/ItemCard/ItemCard";
@@ -6,9 +6,25 @@ import { HiOutlineDeviceTablet } from "react-icons/hi";
 import { AiOutlineLaptop } from "react-icons/ai";
 import { FaMobileAlt } from "react-icons/fa";
 import { MdImportantDevices } from "react-icons/md";
-import { items } from "../../Data/Data";
+// import { items } from "../../Data/Data";
+import axios from "axios";
 const Home = () => {
   const [selectedTitle, setSelectedTitle] = useState("All");
+  const [items,setItems] = useState([]);
+
+  useEffect(()=>{
+      const gettingItems = async ()  =>{
+        try{
+          const itemsFromBackend = await axios.get("http://localhost:8081/api/v1/product/all product");
+          console.log("items in DB",itemsFromBackend.data);
+          setItems(itemsFromBackend.data);
+        }catch(err){
+          console.log("item fetching error",err)
+        }
+     
+      }
+      gettingItems();
+  },[])
   return (
     <div className="home_main">
       <Navbar />
@@ -83,7 +99,7 @@ const Home = () => {
 
           {selectedTitle === "Mobile" &&
             items.map((item) => {
-              if (item.category.trim() === "Mobile") {
+              if (item.category.name.trim()=== "Mobile") {
                 return (
                   <div key={item.id}>
                     {" "}
@@ -104,7 +120,7 @@ const Home = () => {
 
           {selectedTitle === "Laptop" &&
             items.map((item) => {
-              if (item.category.trim() === "Laptop") {
+              if (item.category.name.trim() === "Laptop") {
                 return (
                   <div key={item.id}>
                     {" "}
@@ -125,7 +141,7 @@ const Home = () => {
 
           {selectedTitle === "Tab" &&
             items.map((item) => {
-              if (item.category.trim() === "Tab") {
+              if (item.category.name.trim() === "Tab") {
                 return (
                   <div key={item.id}>
                     {" "}

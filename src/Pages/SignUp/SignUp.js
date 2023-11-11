@@ -63,7 +63,7 @@ const SignUp = () => {
     }
    try{
 
-    const respond = await axios.post("http://localhost:8081/auth/signUp",{
+    const respond = await axios.post("http://localhost:8081/api/v1/auth/signUp",{
       email:emailInput,
       password:passwordInput,
       firstName:fNameInput,
@@ -73,7 +73,7 @@ const SignUp = () => {
     });
     setDisplayCardLogic(true);
 
-    // console.log("sign in respond",respond);
+    console.log("sign in respond",respond);
 
   }catch(err){
     console.log(err);

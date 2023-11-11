@@ -14,6 +14,20 @@ const Orders = () => {
             <h2>119</h2>
             </section>
         </div>
+        <div className='order_item'>
+            <section className='OI_sec1'>
+
+            <h2>Order No:</h2>
+            <h2>119</h2>
+            </section>
+        </div>
+        <div className='order_item'>
+            <section className='OI_sec1'>
+
+            <h2>Order No:</h2>
+            <h2>119</h2>
+            </section>
+        </div>
       </div>
     </div>
   )

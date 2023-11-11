@@ -7,6 +7,7 @@ import ViewCart from './Pages/ViewCart/ViewCart';
 import AdminHome from './Pages/AdminHome/AdminHome';
 import Orders from './Pages/Orders/Orders';
 import { useEffect } from 'react';
+import ViewOrder from './Pages/ViewOrder/ViewOrder';
 
 function App() {
  
@@ -35,8 +36,9 @@ function App() {
           <>
           </>
           )}
-          <Route path='/admin/orders'   element = {<Orders />}  />
           <Route path='/admin'   element = {<AdminHome />}  />
+          <Route path='/admin/orders'   element = {<Orders />}  />
+          <Route path='/admin/orders/:orderId'   element = {<ViewOrder />}  />
       </Routes>
       
     </div>

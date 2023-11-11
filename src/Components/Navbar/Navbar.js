@@ -8,7 +8,7 @@ const Navbar = () => {
     // userName: localStorage.getItem("userName"),
     token: localStorage.getItem("userToken"),
     // userType:"admin",
-    userType:localStorage.getItem("userType"),
+    userType: localStorage.getItem("userType"),
   };
   const [cartLogic, setCartLogic] = useState(false);
   const navigation = useNavigate();
@@ -54,34 +54,47 @@ const Navbar = () => {
           </button>
         )}
 
-        { !loggedUser.token && ( <button
-          className="nav_btn signup"
-          onClick={() => {
-            navigation("/signUp");
-          }}
-        >
-          Sign Up
-        </button>)}
-
-        { loggedUser.userType === "admin" && ( <button
-          className="nav_btn signup"
-          onClick={() => {
-            navigation('/admin/orders');
-          }}
-        >
-          Orders
-        </button>)}
-       
-          {loggedUser.userType !== "admin" &&(
-        <section className="nav_cart_sec" onClick={cartHandler}>
-
-          <button className="nav_btn cart">
-            {" "}
-            <BsCart className="cart_svg" id="cart_svg" />
+        {!loggedUser.token && (
+          <button
+            className="nav_btn signup"
+            onClick={() => {
+              navigation("/signUp");
+            }}
+          >
+            Sign Up
           </button>
-          <span id="cart_item_count">{cartItem.cartItems.length}</span>
-        </section>
-          )}
+        )}
+
+        {loggedUser.userType === "admin" && (
+          <button
+            className="nav_btn signup"
+            onClick={() => {
+              navigation("/admin/orders");
+            }}
+          >
+            Orders
+          </button>
+        )}
+        {loggedUser.userType === "admin" && (
+          <button
+            className="nav_btn signup"
+            onClick={() => {
+              navigation("/admin");
+            }}
+          >
+            Items
+          </button>
+        )}
+
+        {loggedUser.userType !== "admin" && (
+          <section className="nav_cart_sec" onClick={cartHandler}>
+            <button className="nav_btn cart">
+              {" "}
+              <BsCart className="cart_svg" id="cart_svg" />
+            </button>
+            <span id="cart_item_count">{cartItem.cartItems.length}</span>
+          </section>
+        )}
         <div className={cartLogic ? `cart_div` : `cart_div cart_hidden`}>
           {cartItem.cartItems.map((item) => {
             return (
